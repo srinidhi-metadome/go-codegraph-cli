@@ -1,0 +1,4169 @@
+{
+  "project": {
+    "MyProjectName": {
+      "modules": {
+        "config\\config.go": {
+          "structs": [
+            {
+              "name": "Config",
+              "functions": [
+                {
+                  "name": "Middleware",
+                  "parameters": [
+                    {
+                      "name": "next",
+                      "type": "http.Handler"
+                    }
+                  ],
+                  "returnType": "http.Handler",
+                  "id": "func_6"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "McpServers",
+                  "type": "McpServers"
+                },
+                {
+                  "name": "ModelProviders",
+                  "type": "[]ModelProvider"
+                }
+              ],
+              "id": "struct_1"
+            },
+            {
+              "name": "configKey",
+              "functions": null,
+              "properties": [],
+              "id": "struct_3"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewConfig",
+              "parameters": [
+                {
+                  "name": "configJsonFile",
+                  "type": "string"
+                }
+              ],
+              "returnType": "(*Config, error)",
+              "id": "func_2",
+              "package": "config",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\config\\config.go"
+            },
+            {
+              "name": "FromContext",
+              "parameters": [
+                {
+                  "name": "ctx",
+                  "type": "context.Context"
+                }
+              ],
+              "returnType": "(*Config, error)",
+              "id": "func_5",
+              "package": "config",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\config\\config.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"context\"",
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"net/http\"",
+            "import \"os\""
+          ],
+          "constants": [],
+          "variables": [
+            {
+              "name": "key",
+              "type": "",
+              "value": "\u003c*ast.CompositeLit\u003e",
+              "id": "var_4"
+            }
+          ]
+        },
+        "config\\langfuse.go": {
+          "structs": [
+            {
+              "name": "Langfuse",
+              "functions": [
+                {
+                  "name": "LoadEnvs",
+                  "parameters": null,
+                  "returnType": "void",
+                  "id": "func_8"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Secret",
+                  "type": "string"
+                },
+                {
+                  "name": "Public",
+                  "type": "string"
+                },
+                {
+                  "name": "Url",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_7"
+            }
+          ],
+          "functions": [],
+          "interfaces": [],
+          "dependencies": [
+            "import \"os\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "config\\mcp.go": {
+          "structs": [],
+          "functions": [],
+          "interfaces": [],
+          "dependencies": [
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "config\\model_providers.go": {
+          "structs": [
+            {
+              "name": "ModelProvider",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Url",
+                  "type": "string"
+                },
+                {
+                  "name": "Name",
+                  "type": "string"
+                },
+                {
+                  "name": "ApiKey",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_9"
+            }
+          ],
+          "functions": [],
+          "interfaces": [],
+          "dependencies": [],
+          "constants": [],
+          "variables": []
+        },
+        "main.go": {
+          "structs": [
+            {
+              "name": "app",
+              "functions": [
+                {
+                  "name": "withMiddlewares",
+                  "parameters": [
+                    {
+                      "name": "handler",
+                      "type": "func(w http.ResponseWriter, r *http.Request) void"
+                    }
+                  ],
+                  "returnType": "http.Handler",
+                  "id": "func_14"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "cnf",
+                  "type": "*config.Config"
+                },
+                {
+                  "name": "svcs",
+                  "type": "*services.Services"
+                }
+              ],
+              "id": "struct_11"
+            }
+          ],
+          "functions": [
+            {
+              "name": "main",
+              "parameters": null,
+              "returnType": "void",
+              "id": "func_10",
+              "package": "main",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\main.go"
+            },
+            {
+              "name": "newApp",
+              "parameters": null,
+              "returnType": "(*app, error)",
+              "id": "func_12",
+              "package": "main",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\main.go"
+            },
+            {
+              "name": "loadConfigAndServices",
+              "parameters": null,
+              "returnType": "(*config.Config, *services.Services, error)",
+              "id": "func_13",
+              "package": "main",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\main.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"fmt\"",
+            "import \"log\"",
+            "import \"net/http\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/routes/conversation\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/config\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "routes\\conversation\\chat.go": {
+          "structs": [],
+          "functions": [
+            {
+              "name": "StreamEvents",
+              "parameters": [
+                {
+                  "name": "w",
+                  "type": "http.ResponseWriter"
+                },
+                {
+                  "name": "r",
+                  "type": "*http.Request"
+                }
+              ],
+              "returnType": "void",
+              "id": "func_15",
+              "package": "conversation",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\routes\\conversation\\chat.go"
+            },
+            {
+              "name": "GetChat",
+              "parameters": [
+                {
+                  "name": "w",
+                  "type": "http.ResponseWriter"
+                },
+                {
+                  "name": "r",
+                  "type": "*http.Request"
+                }
+              ],
+              "returnType": "void",
+              "id": "func_16",
+              "package": "conversation",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\routes\\conversation\\chat.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"context\"",
+            "import \"encoding/base64\"",
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"log\"",
+            "import \"net/http\"",
+            "import \"strings\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "routes\\conversation\\dev.go": {
+          "structs": [],
+          "functions": [
+            {
+              "name": "StreamDevEvents",
+              "parameters": [
+                {
+                  "name": "w",
+                  "type": "http.ResponseWriter"
+                },
+                {
+                  "name": "r",
+                  "type": "*http.Request"
+                }
+              ],
+              "returnType": "void",
+              "id": "func_17",
+              "package": "conversation",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\routes\\conversation\\dev.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"net/http\"",
+            "import \"strings\"",
+            "import uHttp \"github.com/Adloid-Technologies/metadome-cuttle-api-server/utils/http\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services\"",
+            "import \"github.com/google/uuid\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "sdk\\mcp.go": {
+          "structs": [
+            {
+              "name": "MCPServer",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Name",
+                  "type": "string"
+                },
+                {
+                  "name": "Executable",
+                  "type": "string"
+                },
+                {
+                  "name": "Args",
+                  "type": "[]string"
+                },
+                {
+                  "name": "Env",
+                  "type": "[]string"
+                }
+              ],
+              "id": "struct_18"
+            },
+            {
+              "name": "MCPRequest",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Tool",
+                  "type": "string"
+                },
+                {
+                  "name": "Args",
+                  "type": "map[string]interface{}"
+                }
+              ],
+              "id": "struct_19"
+            },
+            {
+              "name": "MCPResponse",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Response",
+                  "type": "*mcp_golang.ToolResponse"
+                }
+              ],
+              "id": "struct_20"
+            },
+            {
+              "name": "ToolcallListingResponse",
+              "functions": [
+                {
+                  "name": "ToList",
+                  "parameters": null,
+                  "returnType": "[]McpTool",
+                  "id": "func_24"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Tools",
+                  "type": "map[string][]McpTool"
+                }
+              ],
+              "id": "struct_21"
+            },
+            {
+              "name": "ServerStatusResponse",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Servers",
+                  "type": "map[string]ServerConnectIOnStatus"
+                }
+              ],
+              "id": "struct_22"
+            },
+            {
+              "name": "ServerConnectIOnStatus",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "IsConnected",
+                  "type": "bool"
+                },
+                {
+                  "name": "ConnectionMessage",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_23"
+            }
+          ],
+          "functions": [],
+          "interfaces": [],
+          "dependencies": [
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"reflect\"",
+            "import mcp_golang \"github.com/metoro-io/mcp-golang\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "sdk\\ollama.go": {
+          "structs": [
+            {
+              "name": "OllamaRequest",
+              "functions": [
+                {
+                  "name": "MarshalJSON",
+                  "parameters": null,
+                  "returnType": "([]byte, error)",
+                  "comment": "custom json marshalling",
+                  "id": "func_29"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "SessionID",
+                  "type": "string"
+                },
+                {
+                  "name": "Model",
+                  "type": "string"
+                },
+                {
+                  "name": "Prompt",
+                  "type": "string"
+                },
+                {
+                  "name": "Messages",
+                  "type": "[]OllamaMessage"
+                },
+                {
+                  "name": "Stream",
+                  "type": "bool"
+                },
+                {
+                  "name": "Tools",
+                  "type": "[]McpTool"
+                },
+                {
+                  "name": "CurrentStep",
+                  "type": "string"
+                },
+                {
+                  "name": "Workflow",
+                  "type": "Workflow"
+                },
+                {
+                  "name": "CurrentToolcalls",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_25"
+            },
+            {
+              "name": "OllamaResponse",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Message",
+                  "type": "OllamaMessage"
+                },
+                {
+                  "name": "Done",
+                  "type": "bool"
+                }
+              ],
+              "id": "struct_26"
+            },
+            {
+              "name": "OllamaMessage",
+              "functions": [
+                {
+                  "name": "UnmarshalJSON",
+                  "parameters": [
+                    {
+                      "name": "data",
+                      "type": "[]byte"
+                    }
+                  ],
+                  "returnType": "error",
+                  "comment": "custom json unmarshalling",
+                  "id": "func_30"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Role",
+                  "type": "string"
+                },
+                {
+                  "name": "Content",
+                  "type": "string"
+                },
+                {
+                  "name": "ToolcallID",
+                  "type": "string"
+                },
+                {
+                  "name": "ToolCalls",
+                  "type": "[]OllamaToolcall"
+                },
+                {
+                  "name": "NextStep",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_27"
+            },
+            {
+              "name": "OllamaToolcall",
+              "functions": [
+                {
+                  "name": "MarshalJSON",
+                  "parameters": null,
+                  "returnType": "([]byte, error)",
+                  "id": "func_31"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "ID",
+                  "type": "string"
+                },
+                {
+                  "name": "Type",
+                  "type": "string"
+                },
+                {
+                  "name": "Function",
+                  "type": "struct{...}"
+                }
+              ],
+              "id": "struct_28"
+            }
+          ],
+          "functions": [],
+          "interfaces": [],
+          "dependencies": [
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"strings\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "sdk\\session.go": {
+          "structs": [
+            {
+              "name": "ChatRequest",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "ID",
+                  "type": "string"
+                },
+                {
+                  "name": "WorkflowID",
+                  "type": "string"
+                },
+                {
+                  "name": "Message",
+                  "type": "string"
+                },
+                {
+                  "name": "Model",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_32"
+            },
+            {
+              "name": "SessionInfo",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Error",
+                  "type": "string"
+                },
+                {
+                  "name": "Toolcall",
+                  "type": "MCPRequest"
+                },
+                {
+                  "name": "ToolcallResponse",
+                  "type": "MCPResponse"
+                }
+              ],
+              "id": "struct_33"
+            },
+            {
+              "name": "SessionMessage",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Content",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_34"
+            },
+            {
+              "name": "SessionResponse",
+              "functions": [
+                {
+                  "name": "ToOllamaMessage",
+                  "parameters": null,
+                  "returnType": "OllamaMessage",
+                  "id": "func_41"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "ID",
+                  "type": "string"
+                },
+                {
+                  "name": "Prompt",
+                  "type": "string"
+                },
+                {
+                  "name": "Info",
+                  "type": "*SessionInfo"
+                },
+                {
+                  "name": "Message",
+                  "type": "*SessionMessage"
+                }
+              ],
+              "id": "struct_35"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewErrorSessionResponse",
+              "parameters": [
+                {
+                  "name": "err",
+                  "type": "error"
+                }
+              ],
+              "returnType": "SessionResponse",
+              "id": "func_36",
+              "package": "sdk",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\sdk\\session.go"
+            },
+            {
+              "name": "NewUserMessageSessionResponse",
+              "parameters": [
+                {
+                  "name": "content",
+                  "type": "string"
+                }
+              ],
+              "returnType": "SessionResponse",
+              "id": "func_37",
+              "package": "sdk",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\sdk\\session.go"
+            },
+            {
+              "name": "NewUserPrompt",
+              "parameters": [
+                {
+                  "name": "content",
+                  "type": "string"
+                }
+              ],
+              "returnType": "SessionResponse",
+              "id": "func_38",
+              "package": "sdk",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\sdk\\session.go"
+            },
+            {
+              "name": "NewToolcallSessionResponse",
+              "parameters": [
+                {
+                  "name": "tc",
+                  "type": "MCPRequest"
+                }
+              ],
+              "returnType": "SessionResponse",
+              "id": "func_39",
+              "package": "sdk",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\sdk\\session.go"
+            },
+            {
+              "name": "NewToolcallResSessionResponse",
+              "parameters": [
+                {
+                  "name": "tc",
+                  "type": "MCPResponse"
+                }
+              ],
+              "returnType": "SessionResponse",
+              "id": "func_40",
+              "package": "sdk",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\sdk\\session.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [],
+          "constants": [],
+          "variables": []
+        },
+        "sdk\\workflow.go": {
+          "structs": [
+            {
+              "name": "Workflow",
+              "functions": [
+                {
+                  "name": "OllamaMessage",
+                  "parameters": [
+                    {
+                      "name": "stepId",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "OllamaMessage",
+                  "id": "func_43"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "ID",
+                  "type": "string"
+                },
+                {
+                  "name": "Name",
+                  "type": "string"
+                },
+                {
+                  "name": "BasePrompt",
+                  "type": "string"
+                },
+                {
+                  "name": "StartingStepID",
+                  "type": "string"
+                },
+                {
+                  "name": "PromptMap",
+                  "type": "map[string]string"
+                }
+              ],
+              "id": "struct_42"
+            }
+          ],
+          "functions": [],
+          "interfaces": [],
+          "dependencies": [],
+          "constants": [],
+          "variables": []
+        },
+        "services\\filestore\\service.go": {
+          "structs": [
+            {
+              "name": "FileStore",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "filePath",
+                  "type": "string",
+                  "comment": "FilePath is the path to the file where the sessions are stored."
+                },
+                {
+                  "name": "objs",
+                  "type": "map[string]T",
+                  "comment": "Sessions is a map of session IDs to session objects."
+                },
+                {
+                  "name": "f",
+                  "type": "*os.File"
+                }
+              ],
+              "id": "struct_46"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewFileStore",
+              "parameters": [
+                {
+                  "name": "filePath",
+                  "type": "string"
+                }
+              ],
+              "returnType": "(*\u003c*ast.IndexExpr\u003e, error)",
+              "id": "func_47",
+              "package": "filestore",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\filestore\\service.go"
+            }
+          ],
+          "interfaces": [
+            {
+              "name": "StoreObj",
+              "functions": [
+                {
+                  "name": "ID",
+                  "parameters": null,
+                  "returnType": "string",
+                  "id": "method_45"
+                }
+              ],
+              "id": "interface_44"
+            }
+          ],
+          "dependencies": [
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"os\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\gemini\\service.go": {
+          "structs": [],
+          "functions": [],
+          "interfaces": [
+            {
+              "name": "Service",
+              "functions": [
+                {
+                  "name": "Prompt",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.OllamaResponse, error)",
+                  "id": "method_49"
+                }
+              ],
+              "id": "interface_48"
+            }
+          ],
+          "dependencies": [
+            "import \"context\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\gemini\\service_impl.go": {
+          "structs": [
+            {
+              "name": "serviceImpl",
+              "functions": [
+                {
+                  "name": "Prompt",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.OllamaResponse, error)",
+                  "id": "func_52"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "c",
+                  "type": "http.Client"
+                },
+                {
+                  "name": "apiKey",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_50"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewService",
+              "parameters": [
+                {
+                  "name": "c",
+                  "type": "http.Client"
+                },
+                {
+                  "name": "apiKey",
+                  "type": "string"
+                }
+              ],
+              "returnType": "Service",
+              "comment": "NewService returns a new ollama service. Http client can be nil, in which case the default http client is used",
+              "id": "func_51",
+              "package": "gemini",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\gemini\\service_impl.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"bytes\"",
+            "import \"context\"",
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"io\"",
+            "import nativeHttp \"net/http\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/utils/http\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\gemini\\types.go": {
+          "structs": [
+            {
+              "name": "GeminiRequest",
+              "functions": [
+                {
+                  "name": "MarshalJSON",
+                  "parameters": null,
+                  "returnType": "([]byte, error)",
+                  "comment": "https://www.googlecloudcommunity.com/gc/AI-ML/Implementing-System-Prompts-in-Gemini-Pro-for-Chatbot-Creation/m-p/715501  system prompts are need to be in system_instruction",
+                  "id": "func_65"
+                },
+                {
+                  "name": "FromOllamaRequest",
+                  "parameters": [
+                    {
+                      "name": "request",
+                      "type": "sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_66"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Messages",
+                  "type": "[]GeminiMessage"
+                },
+                {
+                  "name": "Tools",
+                  "type": "[]sdk.McpTool"
+                }
+              ],
+              "id": "struct_53"
+            },
+            {
+              "name": "GeminiResponse",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Candidates",
+                  "type": "[]Candidate"
+                }
+              ],
+              "id": "struct_56"
+            },
+            {
+              "name": "Candidate",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Index",
+                  "type": "int32"
+                },
+                {
+                  "name": "Content",
+                  "type": "*Content"
+                },
+                {
+                  "name": "FinishReason",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_57"
+            },
+            {
+              "name": "Content",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Parts",
+                  "type": "[]*Part"
+                },
+                {
+                  "name": "Role",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_58"
+            },
+            {
+              "name": "Part",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Text",
+                  "type": "string"
+                },
+                {
+                  "name": "FunctionCall",
+                  "type": "*FunctionCall"
+                }
+              ],
+              "id": "struct_59"
+            },
+            {
+              "name": "FunctionCall",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "ID",
+                  "type": "string"
+                },
+                {
+                  "name": "Args",
+                  "type": "map[string]any"
+                },
+                {
+                  "name": "Name",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_60"
+            },
+            {
+              "name": "GeminiChoice",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Message",
+                  "type": "GeminiMessage"
+                }
+              ],
+              "id": "struct_61"
+            },
+            {
+              "name": "GeminiMessage",
+              "functions": [
+                {
+                  "name": "FromOllamaMessage",
+                  "parameters": [
+                    {
+                      "name": "message",
+                      "type": "sdk.OllamaMessage"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_67"
+                },
+                {
+                  "name": "ToOllamaMessage",
+                  "parameters": null,
+                  "returnType": "sdk.OllamaMessage",
+                  "id": "func_68"
+                },
+                {
+                  "name": "MarshalJSON",
+                  "parameters": null,
+                  "returnType": "([]byte, error)",
+                  "id": "func_69"
+                },
+                {
+                  "name": "UnmarshalJSON",
+                  "parameters": [
+                    {
+                      "name": "data",
+                      "type": "[]byte"
+                    }
+                  ],
+                  "returnType": "error",
+                  "id": "func_70"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Role",
+                  "type": "string"
+                },
+                {
+                  "name": "Content",
+                  "type": "string"
+                },
+                {
+                  "name": "ToolcallID",
+                  "type": "string"
+                },
+                {
+                  "name": "ToolCalls",
+                  "type": "[]GeminiToolcall"
+                },
+                {
+                  "name": "NextStep",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_62"
+            },
+            {
+              "name": "GeminiToolcall",
+              "functions": [
+                {
+                  "name": "FromOllamaToolcall",
+                  "parameters": [
+                    {
+                      "name": "toolcall",
+                      "type": "sdk.OllamaToolcall"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_71"
+                },
+                {
+                  "name": "ToOllamaToolcall",
+                  "parameters": null,
+                  "returnType": "sdk.OllamaToolcall",
+                  "id": "func_72"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "ID",
+                  "type": "string"
+                },
+                {
+                  "name": "Name",
+                  "type": "string"
+                },
+                {
+                  "name": "Args",
+                  "type": "map[string]string"
+                }
+              ],
+              "id": "struct_64"
+            }
+          ],
+          "functions": [
+            {
+              "name": "extractParameters",
+              "parameters": [
+                {
+                  "name": "fn",
+                  "type": "map[string]interface{}"
+                }
+              ],
+              "returnType": "map[string]interface{}",
+              "id": "func_54",
+              "package": "gemini",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\gemini\\types.go"
+            },
+            {
+              "name": "buildContents",
+              "parameters": [
+                {
+                  "name": "msgs",
+                  "type": "[]GeminiMessage"
+                }
+              ],
+              "returnType": "[]map[string]interface{}",
+              "comment": "This buildContents function checks if text inside part is emtpy then this function removes those part This is required Running Gemini with  toolcall sometimes returns empty response.text with finish_reason of STOP and no other reason. https://discuss.ai.google.dev/t/gemini-2-5-pro-with-empty-response-text/81175 \"parts\": [  { \"text\": \"\" } ]",
+              "id": "func_55",
+              "package": "gemini",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\gemini\\types.go"
+            },
+            {
+              "name": "unpackParts",
+              "parameters": [
+                {
+                  "name": "parts",
+                  "type": "[]map[string]interface{}"
+                }
+              ],
+              "returnType": "(string, []GeminiToolcall)",
+              "comment": "unpackParts processes the incoming \"parts\" array from Gemini JSON and extracts the text content and any function calls. We do this separately because Gemini merges text and functionCall entries in \"parts\"—we need to stitch text segments together and collect function calls in one place.",
+              "id": "func_63",
+              "package": "gemini",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\gemini\\types.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\llm\\service.go": {
+          "structs": [],
+          "functions": [],
+          "interfaces": [
+            {
+              "name": "Service",
+              "functions": [
+                {
+                  "name": "Prompt",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.OllamaResponse, error)",
+                  "id": "method_74"
+                }
+              ],
+              "id": "interface_73"
+            }
+          ],
+          "dependencies": [
+            "import \"context\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\llm\\service_impl.go": {
+          "structs": [
+            {
+              "name": "serviceImpl",
+              "functions": [
+                {
+                  "name": "Prompt",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.OllamaResponse, error)",
+                  "comment": "Prompt prompts the ollama service",
+                  "id": "func_77"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "providerMap",
+                  "type": "map[string]Service"
+                }
+              ],
+              "id": "struct_75"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewService",
+              "parameters": [
+                {
+                  "name": "c",
+                  "type": "http.Client"
+                },
+                {
+                  "name": "modeProviders",
+                  "type": "[]config.ModelProvider"
+                }
+              ],
+              "returnType": "Service",
+              "comment": "NewService returns a new ollama service. Http client can be nil, in which case the default http client is used",
+              "id": "func_76",
+              "package": "llm",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\llm\\service_impl.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"context\"",
+            "import \"strings\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/config\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/gemini\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/ollama\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/openai\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/utils/http\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\mcp\\service.go": {
+          "structs": [],
+          "functions": [],
+          "interfaces": [
+            {
+              "name": "Service",
+              "functions": [
+                {
+                  "name": "ToolCall",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.MCPRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.MCPResponse, error)",
+                  "id": "method_79"
+                },
+                {
+                  "name": "ListTools",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "(*sdk.ToolcallListingResponse, error)",
+                  "id": "method_80"
+                },
+                {
+                  "name": "ConnectToServer",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.MCPServer"
+                    }
+                  ],
+                  "returnType": "error",
+                  "id": "method_81"
+                },
+                {
+                  "name": "ServerStatus",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "sdk.ServerStatusResponse",
+                  "id": "method_82"
+                },
+                {
+                  "name": "Disconnect",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "error",
+                  "id": "method_83"
+                },
+                {
+                  "name": "CachedTools",
+                  "parameters": null,
+                  "returnType": "map[string][]sdk.McpTool",
+                  "id": "method_84"
+                }
+              ],
+              "id": "interface_78"
+            }
+          ],
+          "dependencies": [
+            "import \"context\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\mcp\\service_impl.go": {
+          "structs": [
+            {
+              "name": "service",
+              "functions": [
+                {
+                  "name": "ToolCall",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.MCPRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.MCPResponse, error)",
+                  "id": "func_87"
+                },
+                {
+                  "name": "ListTools",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "(*sdk.ToolcallListingResponse, error)",
+                  "id": "func_88"
+                },
+                {
+                  "name": "ConnectToServer",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.MCPServer"
+                    }
+                  ],
+                  "returnType": "error",
+                  "id": "func_89"
+                },
+                {
+                  "name": "CachedTools",
+                  "parameters": null,
+                  "returnType": "map[string][]sdk.McpTool",
+                  "id": "func_90"
+                },
+                {
+                  "name": "ServerStatus",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "sdk.ServerStatusResponse",
+                  "id": "func_91"
+                },
+                {
+                  "name": "Disconnect",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "error",
+                  "id": "func_92"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "toolsServerMap",
+                  "type": "map[string]string"
+                },
+                {
+                  "name": "clients",
+                  "type": "map[string]client"
+                },
+                {
+                  "name": "process",
+                  "type": "map[string]*exec.Cmd"
+                },
+                {
+                  "name": "tools",
+                  "type": "map[string][]sdk.McpTool"
+                }
+              ],
+              "id": "struct_85"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewService",
+              "parameters": [
+                {
+                  "name": "servers",
+                  "type": "[]sdk.MCPServer"
+                }
+              ],
+              "returnType": "(Service, error)",
+              "id": "func_86",
+              "package": "mcp",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\mcp\\service_impl.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"context\"",
+            "import \"fmt\"",
+            "import \"log\"",
+            "import \"os/exec\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import mcp_golang \"github.com/metoro-io/mcp-golang\"",
+            "import \"github.com/metoro-io/mcp-golang/transport/stdio\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\mcp\\types.go": {
+          "structs": [
+            {
+              "name": "client",
+              "functions": [
+                {
+                  "name": "ToSdk",
+                  "parameters": null,
+                  "returnType": "sdk.ServerConnectIOnStatus",
+                  "id": "func_94"
+                },
+                {
+                  "name": "ListTools",
+                  "parameters": null,
+                  "returnType": "([]sdk.McpTool, error)",
+                  "id": "func_95"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "client",
+                  "type": "*mcp_golang.Client"
+                },
+                {
+                  "name": "isConnected",
+                  "type": "bool"
+                },
+                {
+                  "name": "connectionError",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_93"
+            }
+          ],
+          "functions": [],
+          "interfaces": [],
+          "dependencies": [
+            "import \"context\"",
+            "import \"fmt\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import mcp_golang \"github.com/metoro-io/mcp-golang\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\ollama\\service.go": {
+          "structs": [],
+          "functions": [],
+          "interfaces": [
+            {
+              "name": "Service",
+              "functions": [
+                {
+                  "name": "Prompt",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.OllamaResponse, error)",
+                  "id": "method_97"
+                }
+              ],
+              "id": "interface_96"
+            }
+          ],
+          "dependencies": [
+            "import \"context\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\ollama\\service_impl.go": {
+          "structs": [
+            {
+              "name": "serviceImpl",
+              "functions": [
+                {
+                  "name": "Prompt",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.OllamaResponse, error)",
+                  "comment": "Prompt prompts the ollama service",
+                  "id": "func_100"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "c",
+                  "type": "http.Client"
+                },
+                {
+                  "name": "url",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_98"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewService",
+              "parameters": [
+                {
+                  "name": "c",
+                  "type": "http.Client"
+                },
+                {
+                  "name": "url",
+                  "type": "string"
+                }
+              ],
+              "returnType": "Service",
+              "comment": "NewService returns a new ollama service. Http client can be nil, in which case the default http client is used",
+              "id": "func_99",
+              "package": "ollama",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\ollama\\service_impl.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"bytes\"",
+            "import \"context\"",
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"io\"",
+            "import nativeHttp \"net/http\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/utils/http\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\openai\\service.go": {
+          "structs": [],
+          "functions": [],
+          "interfaces": [
+            {
+              "name": "Service",
+              "functions": [
+                {
+                  "name": "Prompt",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.OllamaResponse, error)",
+                  "id": "method_102"
+                }
+              ],
+              "id": "interface_101"
+            }
+          ],
+          "dependencies": [
+            "import \"context\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\openai\\service_impl.go": {
+          "structs": [
+            {
+              "name": "serviceImpl",
+              "functions": [
+                {
+                  "name": "Prompt",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "*sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "(*sdk.OllamaResponse, error)",
+                  "comment": "Prompt prompts the openai service",
+                  "id": "func_105"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "c",
+                  "type": "http.Client"
+                },
+                {
+                  "name": "apiKey",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_103"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewService",
+              "parameters": [
+                {
+                  "name": "c",
+                  "type": "http.Client"
+                },
+                {
+                  "name": "apiKey",
+                  "type": "string"
+                }
+              ],
+              "returnType": "Service",
+              "comment": "NewService returns a new ollama service. Http client can be nil, in which case the default http client is used",
+              "id": "func_104",
+              "package": "openai",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\openai\\service_impl.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"bytes\"",
+            "import \"context\"",
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"io\"",
+            "import nativeHttp \"net/http\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/utils/http\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\openai\\types.go": {
+          "structs": [
+            {
+              "name": "OpenAiRequest",
+              "functions": [
+                {
+                  "name": "MarshalJSON",
+                  "parameters": null,
+                  "returnType": "([]byte, error)",
+                  "comment": "custom json marshalling",
+                  "id": "func_111"
+                },
+                {
+                  "name": "FromOllamaRequest",
+                  "parameters": [
+                    {
+                      "name": "request",
+                      "type": "sdk.OllamaRequest"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_112"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Model",
+                  "type": "string"
+                },
+                {
+                  "name": "Messages",
+                  "type": "[]OpenAiMessage"
+                },
+                {
+                  "name": "Stream",
+                  "type": "bool"
+                },
+                {
+                  "name": "Tools",
+                  "type": "[]sdk.McpTool"
+                }
+              ],
+              "id": "struct_106"
+            },
+            {
+              "name": "OpenAiResponse",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Choices",
+                  "type": "[]OpenAiChoice"
+                }
+              ],
+              "id": "struct_107"
+            },
+            {
+              "name": "OpenAiChoice",
+              "functions": null,
+              "properties": [
+                {
+                  "name": "Message",
+                  "type": "OpenAiMessage"
+                }
+              ],
+              "id": "struct_108"
+            },
+            {
+              "name": "OpenAiMessage",
+              "functions": [
+                {
+                  "name": "FromOllamaMessage",
+                  "parameters": [
+                    {
+                      "name": "message",
+                      "type": "sdk.OllamaMessage"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_113"
+                },
+                {
+                  "name": "ToOllamaMessage",
+                  "parameters": null,
+                  "returnType": "sdk.OllamaMessage",
+                  "id": "func_114"
+                },
+                {
+                  "name": "UnmarshalJSON",
+                  "parameters": [
+                    {
+                      "name": "data",
+                      "type": "[]byte"
+                    }
+                  ],
+                  "returnType": "error",
+                  "id": "func_115"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Role",
+                  "type": "string"
+                },
+                {
+                  "name": "Content",
+                  "type": "string"
+                },
+                {
+                  "name": "ToolcallID",
+                  "type": "string"
+                },
+                {
+                  "name": "ToolCalls",
+                  "type": "[]OpenAiToolcall"
+                },
+                {
+                  "name": "NextStep",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_109"
+            },
+            {
+              "name": "OpenAiToolcall",
+              "functions": [
+                {
+                  "name": "FromOllamaToolcall",
+                  "parameters": [
+                    {
+                      "name": "toolcall",
+                      "type": "sdk.OllamaToolcall"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_116"
+                },
+                {
+                  "name": "ToOllamaToolcall",
+                  "parameters": null,
+                  "returnType": "sdk.OllamaToolcall",
+                  "id": "func_117"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "ID",
+                  "type": "string"
+                },
+                {
+                  "name": "Type",
+                  "type": "string"
+                },
+                {
+                  "name": "Function",
+                  "type": "struct{...}"
+                }
+              ],
+              "id": "struct_110"
+            }
+          ],
+          "functions": [],
+          "interfaces": [],
+          "dependencies": [
+            "import \"encoding/json\"",
+            "import \"fmt\"",
+            "import \"strings\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\services.go": {
+          "structs": [
+            {
+              "name": "Services",
+              "functions": [
+                {
+                  "name": "Middleware",
+                  "parameters": [
+                    {
+                      "name": "next",
+                      "type": "nativeHttp.Handler"
+                    }
+                  ],
+                  "returnType": "nativeHttp.Handler",
+                  "id": "func_123"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Workflows",
+                  "type": "workflows.Service"
+                },
+                {
+                  "name": "LLM",
+                  "type": "llm.Service"
+                },
+                {
+                  "name": "MCP",
+                  "type": "mcp.Service"
+                },
+                {
+                  "name": "Sessions",
+                  "type": "sessions.Service"
+                },
+                {
+                  "name": "Instrumentation",
+                  "type": "*http.PubSub"
+                }
+              ],
+              "id": "struct_118"
+            },
+            {
+              "name": "serviceKey",
+              "functions": null,
+              "properties": [],
+              "id": "struct_120"
+            }
+          ],
+          "functions": [
+            {
+              "name": "DefaultServices",
+              "parameters": [
+                {
+                  "name": "cnf",
+                  "type": "config.Config"
+                }
+              ],
+              "returnType": "(*Services, error)",
+              "id": "func_119",
+              "package": "services",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\services.go"
+            },
+            {
+              "name": "FromContext",
+              "parameters": [
+                {
+                  "name": "ctx",
+                  "type": "context.Context"
+                }
+              ],
+              "returnType": "(*Services, error)",
+              "id": "func_122",
+              "package": "services",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\services.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"context\"",
+            "import \"fmt\"",
+            "import nativeHttp \"net/http\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/config\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/llm\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/mcp\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/sessions\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/workflows\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/utils/http\""
+          ],
+          "constants": [],
+          "variables": [
+            {
+              "name": "key",
+              "type": "",
+              "value": "\u003c*ast.CompositeLit\u003e",
+              "id": "var_121"
+            }
+          ]
+        },
+        "services\\sessions\\file_store.go": {
+          "structs": [
+            {
+              "name": "fileStore",
+              "functions": [
+                {
+                  "name": "Get",
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "(*sessionObj, error)",
+                  "id": "func_126"
+                },
+                {
+                  "name": "Create",
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "type": "string"
+                    },
+                    {
+                      "name": "name",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "(*sessionObj, error)",
+                  "id": "func_127"
+                },
+                {
+                  "name": "Add",
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "type": "string"
+                    },
+                    {
+                      "name": "messages",
+                      "type": "sdk.SessionResponse"
+                    }
+                  ],
+                  "returnType": "error",
+                  "id": "func_128"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "store",
+                  "type": "\u003c*ast.IndexExpr\u003e"
+                }
+              ],
+              "id": "struct_124"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewFileStore",
+              "parameters": [
+                {
+                  "name": "filename",
+                  "type": "string"
+                }
+              ],
+              "returnType": "(*fileStore, error)",
+              "id": "func_125",
+              "package": "sessions",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\sessions\\file_store.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/filestore\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\sessions\\service.go": {
+          "structs": [],
+          "functions": [],
+          "interfaces": [
+            {
+              "name": "Service",
+              "functions": [
+                {
+                  "name": "Chat",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "sdk.ChatRequest"
+                    }
+                  ],
+                  "returnType": "(chan sdk.SessionResponse, error)",
+                  "id": "method_130"
+                },
+                {
+                  "name": "Get",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "id",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "([]sdk.SessionResponse, error)",
+                  "id": "method_131"
+                }
+              ],
+              "id": "interface_129"
+            }
+          ],
+          "dependencies": [
+            "import \"context\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\sessions\\service_impl.go": {
+          "structs": [
+            {
+              "name": "service",
+              "functions": [
+                {
+                  "name": "Chat",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "req",
+                      "type": "sdk.ChatRequest"
+                    }
+                  ],
+                  "returnType": "(chan sdk.SessionResponse, error)",
+                  "comment": "Chat implements Service.Chat",
+                  "id": "func_134"
+                },
+                {
+                  "name": "Get",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    },
+                    {
+                      "name": "id",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "([]sdk.SessionResponse, error)",
+                  "id": "func_135"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "ws",
+                  "type": "workflows.Service"
+                },
+                {
+                  "name": "mcp",
+                  "type": "mcp.Service"
+                },
+                {
+                  "name": "chat",
+                  "type": "llm.Service"
+                },
+                {
+                  "name": "store",
+                  "type": "Store"
+                }
+              ],
+              "id": "struct_132"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewService",
+              "parameters": [
+                {
+                  "name": "ws",
+                  "type": "workflows.Service"
+                },
+                {
+                  "name": "mcp",
+                  "type": "mcp.Service"
+                },
+                {
+                  "name": "chat",
+                  "type": "llm.Service"
+                },
+                {
+                  "name": "store",
+                  "type": "Store"
+                }
+              ],
+              "returnType": "Service",
+              "id": "func_133",
+              "package": "sessions",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\sessions\\service_impl.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"context\"",
+            "import \"fmt\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/mcp\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/llm\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/workflows\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\sessions\\session.go": {
+          "structs": [
+            {
+              "name": "session",
+              "functions": [
+                {
+                  "name": "StartLoop",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "chan sdk.SessionResponse",
+                  "id": "func_138"
+                },
+                {
+                  "name": "loop",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_139"
+                },
+                {
+                  "name": "makeToolCalls",
+                  "parameters": [
+                    {
+                      "name": "res",
+                      "type": "*sdk.OllamaResponse"
+                    }
+                  ],
+                  "returnType": "([]sdk.OllamaMessage, error)",
+                  "id": "func_140"
+                },
+                {
+                  "name": "askModel",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "(*sdk.OllamaResponse, error)",
+                  "id": "func_141"
+                },
+                {
+                  "name": "endSessionWithMessage",
+                  "parameters": [
+                    {
+                      "name": "msg",
+                      "type": "sdk.SessionResponse"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_142"
+                },
+                {
+                  "name": "sendSessionMessage",
+                  "parameters": [
+                    {
+                      "name": "msg",
+                      "type": "sdk.SessionResponse"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_143"
+                },
+                {
+                  "name": "sendToolcallInfo",
+                  "parameters": [
+                    {
+                      "name": "req",
+                      "type": "sdk.MCPRequest"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_144"
+                },
+                {
+                  "name": "sendToolcallResponseInfo",
+                  "parameters": [
+                    {
+                      "name": "req",
+                      "type": "sdk.MCPResponse"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_145"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "id",
+                  "type": "string"
+                },
+                {
+                  "name": "chatSvc",
+                  "type": "llm.Service"
+                },
+                {
+                  "name": "mcp",
+                  "type": "mcp.Service"
+                },
+                {
+                  "name": "req",
+                  "type": "*sdk.OllamaRequest"
+                },
+                {
+                  "name": "ch",
+                  "type": "chan sdk.SessionResponse"
+                },
+                {
+                  "name": "toolcallCounter",
+                  "type": "int"
+                },
+                {
+                  "name": "store",
+                  "type": "Store"
+                }
+              ],
+              "id": "struct_136"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewSession",
+              "parameters": [
+                {
+                  "name": "chatSvc",
+                  "type": "llm.Service"
+                },
+                {
+                  "name": "mcp",
+                  "type": "mcp.Service"
+                },
+                {
+                  "name": "req",
+                  "type": "*sdk.OllamaRequest"
+                },
+                {
+                  "name": "store",
+                  "type": "Store"
+                }
+              ],
+              "returnType": "*session",
+              "id": "func_137",
+              "package": "sessions",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\sessions\\session.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"context\"",
+            "import \"fmt\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/llm\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/mcp\"",
+            "import \"github.com/google/uuid\"",
+            "import httpctx \"github.com/Adloid-Technologies/metadome-cuttle-api-server/utils/http\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\sessions\\store.go": {
+          "structs": [
+            {
+              "name": "sessionObj",
+              "functions": [
+                {
+                  "name": "ID",
+                  "parameters": null,
+                  "returnType": "string",
+                  "id": "func_151"
+                },
+                {
+                  "name": "OllamaMessages",
+                  "parameters": null,
+                  "returnType": "[]sdk.OllamaMessage",
+                  "id": "func_152"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Name",
+                  "type": "string"
+                },
+                {
+                  "name": "Id",
+                  "type": "string"
+                },
+                {
+                  "name": "Messages",
+                  "type": "[]sdk.SessionResponse"
+                }
+              ],
+              "id": "struct_150"
+            }
+          ],
+          "functions": [],
+          "interfaces": [
+            {
+              "name": "Store",
+              "functions": [
+                {
+                  "name": "Get",
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "(*sessionObj, error)",
+                  "comment": "Get returns the session with the given ID.",
+                  "id": "method_147"
+                },
+                {
+                  "name": "Create",
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "type": "string"
+                    },
+                    {
+                      "name": "name",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "(*sessionObj, error)",
+                  "comment": "Create creates a new session with the given ID and name.",
+                  "id": "method_148"
+                },
+                {
+                  "name": "Add",
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "type": "string"
+                    },
+                    {
+                      "name": "message",
+                      "type": "sdk.SessionResponse"
+                    }
+                  ],
+                  "returnType": "error",
+                  "comment": "Add messages adds messages to the session with the given ID.",
+                  "id": "method_149"
+                }
+              ],
+              "id": "interface_146"
+            }
+          ],
+          "dependencies": [
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\workflows\\service.go": {
+          "structs": [],
+          "functions": [],
+          "interfaces": [
+            {
+              "name": "Service",
+              "functions": [
+                {
+                  "name": "List",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "([]sdk.Workflow, error)",
+                  "id": "method_154"
+                }
+              ],
+              "id": "interface_153"
+            }
+          ],
+          "dependencies": [
+            "import \"context\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "services\\workflows\\service_impl.go": {
+          "structs": [
+            {
+              "name": "service",
+              "functions": [
+                {
+                  "name": "List",
+                  "parameters": [
+                    {
+                      "name": "ctx",
+                      "type": "context.Context"
+                    }
+                  ],
+                  "returnType": "([]sdk.Workflow, error)",
+                  "id": "func_157"
+                }
+              ],
+              "properties": [],
+              "id": "struct_155"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewService",
+              "parameters": null,
+              "returnType": "Service",
+              "id": "func_156",
+              "package": "workflows",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\services\\workflows\\service_impl.go"
+            }
+          ],
+          "interfaces": [],
+          "dependencies": [
+            "import \"context\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/sdk\""
+          ],
+          "constants": [],
+          "variables": []
+        },
+        "utils\\http\\http.go": {
+          "structs": [
+            {
+              "name": "SessionId",
+              "functions": null,
+              "properties": [],
+              "id": "struct_160"
+            },
+            {
+              "name": "Event",
+              "functions": [
+                {
+                  "name": "ID",
+                  "parameters": null,
+                  "returnType": "string",
+                  "id": "func_171"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "SessionID",
+                  "type": "string"
+                },
+                {
+                  "name": "Type",
+                  "type": "string"
+                },
+                {
+                  "name": "Payload",
+                  "type": "[]byte"
+                },
+                {
+                  "name": "URL",
+                  "type": "string"
+                },
+                {
+                  "name": "Method",
+                  "type": "string"
+                },
+                {
+                  "name": "Time",
+                  "type": "string"
+                },
+                {
+                  "name": "Duration",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_165"
+            },
+            {
+              "name": "session",
+              "functions": [
+                {
+                  "name": "ID",
+                  "parameters": null,
+                  "returnType": "string",
+                  "id": "func_172"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "Id",
+                  "type": "string"
+                },
+                {
+                  "name": "Events",
+                  "type": "[]Event"
+                }
+              ],
+              "id": "struct_166"
+            },
+            {
+              "name": "PubSub",
+              "functions": [
+                {
+                  "name": "GetAllEvents",
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "[]Event",
+                  "id": "func_173"
+                },
+                {
+                  "name": "Subscribe",
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "type": "string"
+                    },
+                    {
+                      "name": "eventType",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "chan Event",
+                  "id": "func_174"
+                },
+                {
+                  "name": "Unsubscribe",
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "type": "string"
+                    },
+                    {
+                      "name": "eventType",
+                      "type": "string"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_175"
+                },
+                {
+                  "name": "Publish",
+                  "parameters": [
+                    {
+                      "name": "e",
+                      "type": "Event"
+                    }
+                  ],
+                  "returnType": "void",
+                  "id": "func_176"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "subscribers",
+                  "type": "map[string]map[string]chan Event"
+                },
+                {
+                  "name": "store",
+                  "type": "\u003c*ast.IndexExpr\u003e"
+                },
+                {
+                  "name": "lock",
+                  "type": "sync.Mutex"
+                }
+              ],
+              "id": "struct_167"
+            },
+            {
+              "name": "InstrumentedClient",
+              "functions": [
+                {
+                  "name": "Do",
+                  "parameters": [
+                    {
+                      "name": "req",
+                      "type": "*http.Request"
+                    }
+                  ],
+                  "returnType": "(*http.Response, error)",
+                  "id": "func_177"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "client",
+                  "type": "*http.Client"
+                },
+                {
+                  "name": "pubsub",
+                  "type": "*PubSub"
+                },
+                {
+                  "name": "usecase",
+                  "type": "string"
+                }
+              ],
+              "id": "struct_169"
+            }
+          ],
+          "functions": [
+            {
+              "name": "NewPubSub",
+              "parameters": [
+                {
+                  "name": "filename",
+                  "type": "string"
+                }
+              ],
+              "returnType": "(*PubSub, error)",
+              "id": "func_168",
+              "package": "http",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\utils\\http\\http.go"
+            },
+            {
+              "name": "NewInstrumentedClient",
+              "parameters": [
+                {
+                  "name": "pubsub",
+                  "type": "*PubSub"
+                },
+                {
+                  "name": "usecase",
+                  "type": "string"
+                }
+              ],
+              "returnType": "*InstrumentedClient",
+              "id": "func_170",
+              "package": "http",
+              "filePath": "D:\\cuttle\\metadome-cuttle-api-server\\utils\\http\\http.go"
+            }
+          ],
+          "interfaces": [
+            {
+              "name": "Client",
+              "functions": [
+                {
+                  "name": "Do",
+                  "parameters": [
+                    {
+                      "name": "req",
+                      "type": "*http.Request"
+                    }
+                  ],
+                  "returnType": "(*http.Response, error)",
+                  "id": "method_159"
+                }
+              ],
+              "id": "interface_158"
+            }
+          ],
+          "dependencies": [
+            "import \"bytes\"",
+            "import \"fmt\"",
+            "import \"io\"",
+            "import \"net/http\"",
+            "import \"sync\"",
+            "import \"time\"",
+            "import \"github.com/Adloid-Technologies/metadome-cuttle-api-server/services/filestore\""
+          ],
+          "constants": [
+            {
+              "name": "LLMUsecase",
+              "type": "",
+              "value": "\"LLM\"",
+              "id": "const_162"
+            },
+            {
+              "name": "LLMRequest",
+              "type": "",
+              "value": "\"LLM-Request\"",
+              "id": "const_163"
+            },
+            {
+              "name": "LLMResponse",
+              "type": "",
+              "value": "\"LLM-Response\"",
+              "id": "const_164"
+            }
+          ],
+          "variables": [
+            {
+              "name": "SessionIdKey",
+              "type": "",
+              "value": "\u003c*ast.UnaryExpr\u003e",
+              "id": "var_161"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "codeGraph": {
+    "nodes": [
+      {
+        "id": "interface_78",
+        "type": "interface",
+        "name": "Service",
+        "package": "mcp",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_28",
+        "type": "struct",
+        "name": "OllamaToolcall",
+        "package": "sdk",
+        "file": "ollama.go"
+      },
+      {
+        "id": "func_38",
+        "type": "function",
+        "name": "NewUserPrompt",
+        "package": "sdk",
+        "file": "session.go"
+      },
+      {
+        "id": "interface_48",
+        "type": "interface",
+        "name": "Service",
+        "package": "gemini",
+        "file": "service.go"
+      },
+      {
+        "id": "method_154",
+        "type": "interface_method",
+        "name": "List",
+        "package": "workflows",
+        "file": "service.go"
+      },
+      {
+        "id": "method_159",
+        "type": "interface_method",
+        "name": "Do",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "struct_18",
+        "type": "struct",
+        "name": "MCPServer",
+        "package": "sdk",
+        "file": "mcp.go"
+      },
+      {
+        "id": "struct_136",
+        "type": "struct",
+        "name": "session",
+        "package": "sessions",
+        "file": "session.go"
+      },
+      {
+        "id": "struct_109",
+        "type": "struct",
+        "name": "OpenAiMessage",
+        "package": "openai",
+        "file": "types.go"
+      },
+      {
+        "id": "func_63",
+        "type": "function",
+        "name": "unpackParts",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_98",
+        "type": "struct",
+        "name": "serviceImpl",
+        "package": "ollama",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "func_99",
+        "type": "function",
+        "name": "NewService",
+        "package": "ollama",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "interface_158",
+        "type": "interface",
+        "name": "Client",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "func_40",
+        "type": "function",
+        "name": "NewToolcallResSessionResponse",
+        "package": "sdk",
+        "file": "session.go"
+      },
+      {
+        "id": "struct_32",
+        "type": "struct",
+        "name": "ChatRequest",
+        "package": "sdk",
+        "file": "session.go"
+      },
+      {
+        "id": "method_45",
+        "type": "interface_method",
+        "name": "ID",
+        "package": "filestore",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_60",
+        "type": "struct",
+        "name": "FunctionCall",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "interface_73",
+        "type": "interface",
+        "name": "Service",
+        "package": "llm",
+        "file": "service.go"
+      },
+      {
+        "id": "method_84",
+        "type": "interface_method",
+        "name": "CachedTools",
+        "package": "mcp",
+        "file": "service.go"
+      },
+      {
+        "id": "interface_96",
+        "type": "interface",
+        "name": "Service",
+        "package": "ollama",
+        "file": "service.go"
+      },
+      {
+        "id": "func_10",
+        "type": "function",
+        "name": "main",
+        "package": "main",
+        "file": "main.go"
+      },
+      {
+        "id": "struct_93",
+        "type": "struct",
+        "name": "client",
+        "package": "mcp",
+        "file": "types.go"
+      },
+      {
+        "id": "method_149",
+        "type": "interface_method",
+        "name": "Add",
+        "package": "sessions",
+        "file": "store.go"
+      },
+      {
+        "id": "struct_165",
+        "type": "struct",
+        "name": "Event",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "struct_27",
+        "type": "struct",
+        "name": "OllamaMessage",
+        "package": "sdk",
+        "file": "ollama.go"
+      },
+      {
+        "id": "interface_44",
+        "type": "interface",
+        "name": "StoreObj",
+        "package": "filestore",
+        "file": "service.go"
+      },
+      {
+        "id": "func_119",
+        "type": "function",
+        "name": "DefaultServices",
+        "package": "services",
+        "file": "services.go"
+      },
+      {
+        "id": "interface_146",
+        "type": "interface",
+        "name": "Store",
+        "package": "sessions",
+        "file": "store.go"
+      },
+      {
+        "id": "struct_23",
+        "type": "struct",
+        "name": "ServerConnectIOnStatus",
+        "package": "sdk",
+        "file": "mcp.go"
+      },
+      {
+        "id": "method_74",
+        "type": "interface_method",
+        "name": "Prompt",
+        "package": "llm",
+        "file": "service.go"
+      },
+      {
+        "id": "method_82",
+        "type": "interface_method",
+        "name": "ServerStatus",
+        "package": "mcp",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_118",
+        "type": "struct",
+        "name": "Services",
+        "package": "services",
+        "file": "services.go"
+      },
+      {
+        "id": "method_148",
+        "type": "interface_method",
+        "name": "Create",
+        "package": "sessions",
+        "file": "store.go"
+      },
+      {
+        "id": "struct_7",
+        "type": "struct",
+        "name": "Langfuse",
+        "package": "config",
+        "file": "langfuse.go"
+      },
+      {
+        "id": "interface_129",
+        "type": "interface",
+        "name": "Service",
+        "package": "sessions",
+        "file": "service.go"
+      },
+      {
+        "id": "func_137",
+        "type": "function",
+        "name": "NewSession",
+        "package": "sessions",
+        "file": "session.go"
+      },
+      {
+        "id": "struct_57",
+        "type": "struct",
+        "name": "Candidate",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_22",
+        "type": "struct",
+        "name": "ServerStatusResponse",
+        "package": "sdk",
+        "file": "mcp.go"
+      },
+      {
+        "id": "func_15",
+        "type": "function",
+        "name": "StreamEvents",
+        "package": "conversation",
+        "file": "chat.go"
+      },
+      {
+        "id": "struct_58",
+        "type": "struct",
+        "name": "Content",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "method_147",
+        "type": "interface_method",
+        "name": "Get",
+        "package": "sessions",
+        "file": "store.go"
+      },
+      {
+        "id": "func_54",
+        "type": "function",
+        "name": "extractParameters",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_150",
+        "type": "struct",
+        "name": "sessionObj",
+        "package": "sessions",
+        "file": "store.go"
+      },
+      {
+        "id": "func_36",
+        "type": "function",
+        "name": "NewErrorSessionResponse",
+        "package": "sdk",
+        "file": "session.go"
+      },
+      {
+        "id": "func_17",
+        "type": "function",
+        "name": "StreamDevEvents",
+        "package": "conversation",
+        "file": "dev.go"
+      },
+      {
+        "id": "struct_3",
+        "type": "struct",
+        "name": "configKey",
+        "package": "config",
+        "file": "config.go"
+      },
+      {
+        "id": "struct_103",
+        "type": "struct",
+        "name": "serviceImpl",
+        "package": "openai",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "struct_110",
+        "type": "struct",
+        "name": "OpenAiToolcall",
+        "package": "openai",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_160",
+        "type": "struct",
+        "name": "SessionId",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "const_162",
+        "type": "constant",
+        "name": "LLMUsecase",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "struct_169",
+        "type": "struct",
+        "name": "InstrumentedClient",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "struct_56",
+        "type": "struct",
+        "name": "GeminiResponse",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_25",
+        "type": "struct",
+        "name": "OllamaRequest",
+        "package": "sdk",
+        "file": "ollama.go"
+      },
+      {
+        "id": "struct_26",
+        "type": "struct",
+        "name": "OllamaResponse",
+        "package": "sdk",
+        "file": "ollama.go"
+      },
+      {
+        "id": "interface_153",
+        "type": "interface",
+        "name": "Service",
+        "package": "workflows",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_19",
+        "type": "struct",
+        "name": "MCPRequest",
+        "package": "sdk",
+        "file": "mcp.go"
+      },
+      {
+        "id": "func_47",
+        "type": "function",
+        "name": "NewFileStore",
+        "package": "filestore",
+        "file": "service.go"
+      },
+      {
+        "id": "method_49",
+        "type": "interface_method",
+        "name": "Prompt",
+        "package": "gemini",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_62",
+        "type": "struct",
+        "name": "GeminiMessage",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "func_133",
+        "type": "function",
+        "name": "NewService",
+        "package": "sessions",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "struct_166",
+        "type": "struct",
+        "name": "session",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "func_12",
+        "type": "function",
+        "name": "newApp",
+        "package": "main",
+        "file": "main.go"
+      },
+      {
+        "id": "struct_108",
+        "type": "struct",
+        "name": "OpenAiChoice",
+        "package": "openai",
+        "file": "types.go"
+      },
+      {
+        "id": "func_122",
+        "type": "function",
+        "name": "FromContext",
+        "package": "services",
+        "file": "services.go"
+      },
+      {
+        "id": "func_125",
+        "type": "function",
+        "name": "NewFileStore",
+        "package": "sessions",
+        "file": "file_store.go"
+      },
+      {
+        "id": "struct_132",
+        "type": "struct",
+        "name": "service",
+        "package": "sessions",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "const_163",
+        "type": "constant",
+        "name": "LLMRequest",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "method_97",
+        "type": "interface_method",
+        "name": "Prompt",
+        "package": "ollama",
+        "file": "service.go"
+      },
+      {
+        "id": "func_168",
+        "type": "function",
+        "name": "NewPubSub",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "func_51",
+        "type": "function",
+        "name": "NewService",
+        "package": "gemini",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "struct_34",
+        "type": "struct",
+        "name": "SessionMessage",
+        "package": "sdk",
+        "file": "session.go"
+      },
+      {
+        "id": "func_2",
+        "type": "function",
+        "name": "NewConfig",
+        "package": "config",
+        "file": "config.go"
+      },
+      {
+        "id": "struct_11",
+        "type": "struct",
+        "name": "app",
+        "package": "main",
+        "file": "main.go"
+      },
+      {
+        "id": "func_13",
+        "type": "function",
+        "name": "loadConfigAndServices",
+        "package": "main",
+        "file": "main.go"
+      },
+      {
+        "id": "func_16",
+        "type": "function",
+        "name": "GetChat",
+        "package": "conversation",
+        "file": "chat.go"
+      },
+      {
+        "id": "struct_42",
+        "type": "struct",
+        "name": "Workflow",
+        "package": "sdk",
+        "file": "workflow.go"
+      },
+      {
+        "id": "func_55",
+        "type": "function",
+        "name": "buildContents",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_75",
+        "type": "struct",
+        "name": "serviceImpl",
+        "package": "llm",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "method_79",
+        "type": "interface_method",
+        "name": "ToolCall",
+        "package": "mcp",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_9",
+        "type": "struct",
+        "name": "ModelProvider",
+        "package": "config",
+        "file": "model_providers.go"
+      },
+      {
+        "id": "struct_64",
+        "type": "struct",
+        "name": "GeminiToolcall",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "var_161",
+        "type": "variable",
+        "name": "SessionIdKey",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "struct_33",
+        "type": "struct",
+        "name": "SessionInfo",
+        "package": "sdk",
+        "file": "session.go"
+      },
+      {
+        "id": "interface_101",
+        "type": "interface",
+        "name": "Service",
+        "package": "openai",
+        "file": "service.go"
+      },
+      {
+        "id": "method_131",
+        "type": "interface_method",
+        "name": "Get",
+        "package": "sessions",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_46",
+        "type": "struct",
+        "name": "FileStore",
+        "package": "filestore",
+        "file": "service.go"
+      },
+      {
+        "id": "func_76",
+        "type": "function",
+        "name": "NewService",
+        "package": "llm",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "func_104",
+        "type": "function",
+        "name": "NewService",
+        "package": "openai",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "func_156",
+        "type": "function",
+        "name": "NewService",
+        "package": "workflows",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "const_164",
+        "type": "constant",
+        "name": "LLMResponse",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "func_170",
+        "type": "function",
+        "name": "NewInstrumentedClient",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "struct_35",
+        "type": "struct",
+        "name": "SessionResponse",
+        "package": "sdk",
+        "file": "session.go"
+      },
+      {
+        "id": "method_83",
+        "type": "interface_method",
+        "name": "Disconnect",
+        "package": "mcp",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_1",
+        "type": "struct",
+        "name": "Config",
+        "package": "config",
+        "file": "config.go"
+      },
+      {
+        "id": "struct_107",
+        "type": "struct",
+        "name": "OpenAiResponse",
+        "package": "openai",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_53",
+        "type": "struct",
+        "name": "GeminiRequest",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "method_81",
+        "type": "interface_method",
+        "name": "ConnectToServer",
+        "package": "mcp",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_124",
+        "type": "struct",
+        "name": "fileStore",
+        "package": "sessions",
+        "file": "file_store.go"
+      },
+      {
+        "id": "var_4",
+        "type": "variable",
+        "name": "key",
+        "package": "config",
+        "file": "config.go"
+      },
+      {
+        "id": "struct_50",
+        "type": "struct",
+        "name": "serviceImpl",
+        "package": "gemini",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "func_86",
+        "type": "function",
+        "name": "NewService",
+        "package": "mcp",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "struct_106",
+        "type": "struct",
+        "name": "OpenAiRequest",
+        "package": "openai",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_167",
+        "type": "struct",
+        "name": "PubSub",
+        "package": "http",
+        "file": "http.go"
+      },
+      {
+        "id": "func_5",
+        "type": "function",
+        "name": "FromContext",
+        "package": "config",
+        "file": "config.go"
+      },
+      {
+        "id": "var_121",
+        "type": "variable",
+        "name": "key",
+        "package": "services",
+        "file": "services.go"
+      },
+      {
+        "id": "struct_155",
+        "type": "struct",
+        "name": "service",
+        "package": "workflows",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "func_37",
+        "type": "function",
+        "name": "NewUserMessageSessionResponse",
+        "package": "sdk",
+        "file": "session.go"
+      },
+      {
+        "id": "struct_59",
+        "type": "struct",
+        "name": "Part",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_61",
+        "type": "struct",
+        "name": "GeminiChoice",
+        "package": "gemini",
+        "file": "types.go"
+      },
+      {
+        "id": "struct_85",
+        "type": "struct",
+        "name": "service",
+        "package": "mcp",
+        "file": "service_impl.go"
+      },
+      {
+        "id": "method_102",
+        "type": "interface_method",
+        "name": "Prompt",
+        "package": "openai",
+        "file": "service.go"
+      },
+      {
+        "id": "method_130",
+        "type": "interface_method",
+        "name": "Chat",
+        "package": "sessions",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_20",
+        "type": "struct",
+        "name": "MCPResponse",
+        "package": "sdk",
+        "file": "mcp.go"
+      },
+      {
+        "id": "method_80",
+        "type": "interface_method",
+        "name": "ListTools",
+        "package": "mcp",
+        "file": "service.go"
+      },
+      {
+        "id": "struct_120",
+        "type": "struct",
+        "name": "serviceKey",
+        "package": "services",
+        "file": "services.go"
+      },
+      {
+        "id": "func_39",
+        "type": "function",
+        "name": "NewToolcallSessionResponse",
+        "package": "sdk",
+        "file": "session.go"
+      },
+      {
+        "id": "struct_21",
+        "type": "struct",
+        "name": "ToolcallListingResponse",
+        "package": "sdk",
+        "file": "mcp.go"
+      }
+    ],
+    "edges": [
+      {
+        "from": "struct_1",
+        "to": "func_6",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_7",
+        "to": "func_8",
+        "relation": "has_method"
+      },
+      {
+        "from": "func_13",
+        "to": "func_2",
+        "relation": "calls"
+      },
+      {
+        "from": "struct_11",
+        "to": "func_14",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_21",
+        "to": "func_24",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_25",
+        "to": "func_29",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_27",
+        "to": "func_30",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_28",
+        "to": "func_31",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_33",
+        "to": "struct_19",
+        "relation": "has_field_of_type"
+      },
+      {
+        "from": "struct_33",
+        "to": "struct_20",
+        "relation": "has_field_of_type"
+      },
+      {
+        "from": "struct_35",
+        "to": "func_41",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_42",
+        "to": "func_43",
+        "relation": "has_method"
+      },
+      {
+        "from": "interface_44",
+        "to": "method_45",
+        "relation": "declares"
+      },
+      {
+        "from": "interface_48",
+        "to": "method_49",
+        "relation": "declares"
+      },
+      {
+        "from": "struct_50",
+        "to": "func_52",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_53",
+        "to": "func_65",
+        "relation": "has_method"
+      },
+      {
+        "from": "func_65",
+        "to": "func_54",
+        "relation": "calls"
+      },
+      {
+        "from": "func_65",
+        "to": "func_55",
+        "relation": "calls"
+      },
+      {
+        "from": "struct_53",
+        "to": "func_66",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_62",
+        "to": "func_67",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_62",
+        "to": "func_68",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_62",
+        "to": "func_69",
+        "relation": "has_method"
+      },
+      {
+        "from": "func_69",
+        "to": "func_54",
+        "relation": "calls"
+      },
+      {
+        "from": "func_69",
+        "to": "func_55",
+        "relation": "calls"
+      },
+      {
+        "from": "struct_62",
+        "to": "func_70",
+        "relation": "has_method"
+      },
+      {
+        "from": "func_70",
+        "to": "func_63",
+        "relation": "calls"
+      },
+      {
+        "from": "struct_64",
+        "to": "func_72",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_64",
+        "to": "func_71",
+        "relation": "has_method"
+      },
+      {
+        "from": "interface_73",
+        "to": "method_74",
+        "relation": "declares"
+      },
+      {
+        "from": "func_76",
+        "to": "func_51",
+        "relation": "calls"
+      },
+      {
+        "from": "struct_75",
+        "to": "func_77",
+        "relation": "has_method"
+      },
+      {
+        "from": "interface_78",
+        "to": "method_79",
+        "relation": "declares"
+      },
+      {
+        "from": "interface_78",
+        "to": "method_80",
+        "relation": "declares"
+      },
+      {
+        "from": "interface_78",
+        "to": "method_81",
+        "relation": "declares"
+      },
+      {
+        "from": "interface_78",
+        "to": "method_82",
+        "relation": "declares"
+      },
+      {
+        "from": "interface_78",
+        "to": "method_83",
+        "relation": "declares"
+      },
+      {
+        "from": "interface_78",
+        "to": "method_84",
+        "relation": "declares"
+      },
+      {
+        "from": "struct_85",
+        "to": "func_88",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_85",
+        "to": "func_89",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_85",
+        "to": "func_90",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_85",
+        "to": "func_91",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_85",
+        "to": "func_92",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_85",
+        "to": "func_87",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_93",
+        "to": "func_94",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_93",
+        "to": "func_95",
+        "relation": "has_method"
+      },
+      {
+        "from": "interface_96",
+        "to": "method_97",
+        "relation": "declares"
+      },
+      {
+        "from": "struct_98",
+        "to": "func_100",
+        "relation": "has_method"
+      },
+      {
+        "from": "interface_101",
+        "to": "method_102",
+        "relation": "declares"
+      },
+      {
+        "from": "struct_103",
+        "to": "func_105",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_106",
+        "to": "func_111",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_106",
+        "to": "func_112",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_109",
+        "to": "func_113",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_109",
+        "to": "func_114",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_109",
+        "to": "func_115",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_110",
+        "to": "func_116",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_110",
+        "to": "func_117",
+        "relation": "has_method"
+      },
+      {
+        "from": "func_119",
+        "to": "func_86",
+        "relation": "calls"
+      },
+      {
+        "from": "func_119",
+        "to": "func_76",
+        "relation": "calls"
+      },
+      {
+        "from": "struct_118",
+        "to": "func_123",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_124",
+        "to": "func_126",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_124",
+        "to": "func_127",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_124",
+        "to": "func_128",
+        "relation": "has_method"
+      },
+      {
+        "from": "interface_129",
+        "to": "method_130",
+        "relation": "declares"
+      },
+      {
+        "from": "interface_129",
+        "to": "method_131",
+        "relation": "declares"
+      },
+      {
+        "from": "struct_132",
+        "to": "func_134",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_132",
+        "to": "func_135",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_136",
+        "to": "func_140",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_136",
+        "to": "func_141",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_136",
+        "to": "func_142",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_136",
+        "to": "func_143",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_136",
+        "to": "func_144",
+        "relation": "has_method"
+      },
+      {
+        "from": "func_144",
+        "to": "func_39",
+        "relation": "calls"
+      },
+      {
+        "from": "struct_136",
+        "to": "func_145",
+        "relation": "has_method"
+      },
+      {
+        "from": "func_145",
+        "to": "func_40",
+        "relation": "calls"
+      },
+      {
+        "from": "struct_136",
+        "to": "func_138",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_136",
+        "to": "func_139",
+        "relation": "has_method"
+      },
+      {
+        "from": "func_139",
+        "to": "func_38",
+        "relation": "calls"
+      },
+      {
+        "from": "func_139",
+        "to": "func_36",
+        "relation": "calls"
+      },
+      {
+        "from": "func_139",
+        "to": "func_36",
+        "relation": "calls"
+      },
+      {
+        "from": "func_139",
+        "to": "func_37",
+        "relation": "calls"
+      },
+      {
+        "from": "func_139",
+        "to": "func_36",
+        "relation": "calls"
+      },
+      {
+        "from": "interface_146",
+        "to": "method_147",
+        "relation": "declares"
+      },
+      {
+        "from": "interface_146",
+        "to": "method_148",
+        "relation": "declares"
+      },
+      {
+        "from": "interface_146",
+        "to": "method_149",
+        "relation": "declares"
+      },
+      {
+        "from": "struct_150",
+        "to": "func_151",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_150",
+        "to": "func_152",
+        "relation": "has_method"
+      },
+      {
+        "from": "interface_153",
+        "to": "method_154",
+        "relation": "declares"
+      },
+      {
+        "from": "struct_155",
+        "to": "func_157",
+        "relation": "has_method"
+      },
+      {
+        "from": "interface_158",
+        "to": "method_159",
+        "relation": "declares"
+      },
+      {
+        "from": "struct_165",
+        "to": "func_171",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_166",
+        "to": "func_172",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_167",
+        "to": "func_174",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_167",
+        "to": "func_175",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_167",
+        "to": "func_176",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_167",
+        "to": "func_173",
+        "relation": "has_method"
+      },
+      {
+        "from": "struct_169",
+        "to": "func_177",
+        "relation": "has_method"
+      }
+    ]
+  }
+}
