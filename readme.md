@@ -30,7 +30,7 @@ go build -o codegraph .
 
 ## Usage
 
-# Default: analyze current directory, project name "MyProject", output to output.json
+Default: analyze current directory, project name "MyProject", output to output.json
 ./codegraph
 
 # Custom path, project name, and output file
