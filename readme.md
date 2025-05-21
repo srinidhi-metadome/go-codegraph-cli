@@ -73,5 +73,3 @@ A simple CLI tool that analyzes a Go project and generates a JSON â€œcode graphâ
    git clone https://github.com/srinidhi-metadome/go-codegraph-cli.git
    cd go-codegraph-cli
 
-
->>>>>>> f51a20546c46d37f377d2d2aff950ae6e236dbe4
