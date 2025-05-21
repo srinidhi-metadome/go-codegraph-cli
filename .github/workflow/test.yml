@@ -1,0 +1,34 @@
+name: Workflow Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  workflow-test:
+    name: Test GitHub Actions Workflow
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Print environment info
+      run: |
+        echo "::group::Runner Environment Variables"
+        env
+        echo "::endgroup::"
+
+    - name: Validate YAML syntax
+      run: |
+        echo "Validating all workflow YAML files..."
+        find .github/workflows -name '*.yml' -print0 | xargs -0 yamllint -c .github/workflows/.yamllint.yaml
+
+    - name: Run a dummy script
+      run: |
+        echo "Hello from Workflow Test!"
